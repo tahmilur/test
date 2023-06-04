@@ -129,6 +129,10 @@ git tag 1.0.0 1b2e1d63ff
 
 -- log
 git log
+-- to see particular branch log
+git log testing
+-- To show all of the branches, add --all to your git log command
+git log --all
 -- help
 git log --help
 -- To see only the commits of a certain author
@@ -152,6 +156,70 @@ git checkout -- <filename>
 -- drop all your local changes and commits
 git fetch origin
 git reset --hard origin/master
+
+-- Git Branching --------------------
+git add README test.rb LICENSE
+git commit -m 'Initial commit
+-- Creating a New Branch
+git branch testing
+-- create a new branch and switch to it
+ git checkout -b <newbranchname>
+-- to see branch pointer pointing
+git log --oneline --decorate
+-- swtiching to branch
+git checkout testing
+-- Switch to an existing branch
+git switch testing-branch
+-- Create a new branch and switch to it: version 2.23
+git switch -c new-branch
+-- Return to your previously checked out branch
+git switch -
+-- create new fie and commit
+echo "# test" >> README007.md
+git commit -a -m "Make a change"
+
+-- Basic Branching and Merging ----------------
+-- Switched to a new branch "iss53"
+git checkout -b iss53
+-- shorthand of previous command
+git branch iss53
+git checkout iss53
+-- create new file and commit
+vim index.html
+git commit -a -m 'Create new footer [issue 53]'
+
+-- Switched to branch 'master'
+git checkout master
+-- create a new branch 
+git checkout -b hotfix
+-- Switched to a new branch 'hotfix'
+vim index.html
+git commit -a -m 'Fix broken email address'
+-- checkout mas agin
+git checkout master
+-- marge hotfix into master
+git merge hotfix
+-- Deleted branch hotfix.
+git branch -d hotfix
+
+-- hotfix branch changes are not in the branch "iss53"
+git checkout iss53
+git merge master
+-- 
+
+-- Switched to branch  "iss53" again
+git checkout iss53
+-- create new file and commit
+vim index.html
+git commit -a -m 'Finish the new footer [issue 53]'
+-- marge with master
+git checkout master
+-- Switched to branch 'master'
+git merge iss53
+-- Deleted branch iss53.
+git branch -d iss53
+
+-- ******************************************
 
 -- To fix that you can remove remote origin and link it again. First, check the remote origin:
 git remote -v
