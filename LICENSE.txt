@@ -1,8 +1,62 @@
 This is a test file
 
+git help config
+git add -h
 git --version
 git config --list --show-origin
+git config user.name
+git config user.email
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+git config --global core.editor emacs
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+git config --global init.defaultBranch main
+
+-- create a new branch named "feature_x" and switch to it using
+git checkout -b feature_x
+-- switch back to master
+git checkout master
+-- delete the branch again
+git branch -d feature_x
+-- update your local repository to the newest commit
+git pull
+-- push the branch to your remote repository
+git push origin <branch>
+-- to merge another branch into your active branch
+git merge <branch>
+
+-- to mark them as merged with
+git add <filename>
+-- before merging changes, you can also preview them by using
+git diff <source_branch> <target_branch>
+
+-- tagging
+git tag 1.0.0 1b2e1d63ff
+
+-- log
+git log
+-- help
+git log --help
+-- To see only the commits of a certain author
+git log --author=bob
+-- To see a very compressed log where each commit is one line
+git log --pretty=oneline
+-- to see an ASCII art tree of all the branches
+git log --graph --oneline --decorate --all
+-- See only which files have changed
+git log --name-status
+
+
+-- replace local changes : this replaces the changes in your working tree with the last content
+git checkout -- <filename>
+
+-- drop all your local changes and commits
+git fetch origin
+git reset --hard origin/master
+*****************************************************************************
+
 git status
+git status -s
 git clone https://github.com/tahmilur/test.git
 
 …or create a new repository on the command line
@@ -38,4 +92,22 @@ git remote add origin https://github.com/tahmilur/test.git
 git pull --ff-only
 git branch --set-upstream-to=origin/main
 
-hmm
+Here is another example .gitignore file: ------------------------
+
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
