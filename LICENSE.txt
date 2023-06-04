@@ -1,5 +1,7 @@
 This is a test file
 
+git clone https://github.com/tahmilur/test.git
+
 …or create a new repository on the command line
 
 echo "# test" >> README.md
@@ -17,4 +19,16 @@ git push -u origin main
 
 more change.
 By Tahmilur
-date: 2023-05-26
+date: 2023-06-04
+
+
+Git errors: cannot checkout branch - error: pathspec 'branch_name' did not match any file(s) known to git
+
+To fix that you can remove remote origin and link it again.
+First, check the remote origin:
+
+git remote -v
+git remote remove origin
+git remote add origin https://github.com/tahmilur/test.git
+git pull --ff-only
+git branch --set-upstream-to=origin/main
