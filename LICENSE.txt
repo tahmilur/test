@@ -1,6 +1,7 @@
 This is a test file
 
 git --version
+git config --list --show-origin
 git status
 git clone https://github.com/tahmilur/test.git
 
@@ -18,6 +19,8 @@ git push -u origin main
 git remote add origin https://github.com/tahmilur/test.git
 git branch -M main
 git push -u origin main
+
+git pull
 
 more change.
 By Tahmilur
