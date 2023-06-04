@@ -1,5 +1,7 @@
 This is a test file
 
+git --version
+git status
 git clone https://github.com/tahmilur/test.git
 
 …or create a new repository on the command line
