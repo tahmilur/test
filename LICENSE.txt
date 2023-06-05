@@ -74,6 +74,8 @@ git config --global alias.last 'log -1 HEAD'
 -- to see last commit
 git last
 
+-- create a file named 'README.md' in windows
+echo "# test" >> README.md
 -- to mark them as merged with
 git add <filename>
 -- before merging changes, you can also preview them by using
