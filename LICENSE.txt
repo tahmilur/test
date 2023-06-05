@@ -1,3 +1,4 @@
+-- https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 git --version
 git help config
 git add -h
@@ -55,19 +56,42 @@ git push origin --delete <tagname>
 -- Checking out Tags
 git checkout v2.0.0
 
+-- Branch Management
+-- list of local branch
+git branch
+-- to see all branch including remote
+git branch --all
+-- to see the last commit on each branch
+git branch -v
+-- To see which branches are already merged into the branch you’re on, you can run 
+git branch --merged
+-- To see all the branches that contain work you haven’t yet merged in, you can run 
+git branch --no-merged
+-- to check merged status whithout checkout
+git branch --no-merged master
+
 -- create a new branch named "feature_x" and switch to it using
 git checkout -b feature_x
 -- switch back to master
 git checkout master
--- delete the branch again
-git branch -d feature_x
--- update your local repository to the newest commit
-git pull
+-- to merge another branch into your active branch
+git merge <branch>
 -- push the branch to your remote repository
 git push origin <branch>
 
--- to merge another branch into your active branch
-git merge <branch>
+-- to change branch name in local
+git branch --move bad-branch-name corrected-branch-name
+-- to change branch name in remote
+git push --set-upstream origin corrected-branch-name
+-- delete the branch locally
+git branch -d feature_x
+-- force branch delete when not fully merged
+git branch -D feature_x
+-- delete remote branch 
+git push origin --delete branch-name
+
+-- update your local repository to the newest commit
+git pull
 
 -- Git Aliases
 git config --global alias.last 'log -1 HEAD'
