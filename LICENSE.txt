@@ -60,7 +60,9 @@ git push origin --delete <tagname>
 -- Checking out Tags
 git checkout v2.0.0
 
--- Branch Management
+-- Git Branching - Basic Branching and Merging
+-- https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
 -- list of local branch
 git branch
 -- to see all branch including remote
