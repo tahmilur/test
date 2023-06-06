@@ -71,7 +71,7 @@ git branch -v
 git branch --merged
 -- To see all the branches that contain work you haven’t yet merged in, you can run 
 git branch --no-merged
--- to check merged status whithout checkout
+-- to check merged status whithout checkout with branch
 git branch --no-merged master
 
 -- create a new branch named "feature_x" and switch to it using
