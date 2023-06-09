@@ -136,6 +136,23 @@ git restore CONTRIBUTING.md
 -- Unmodifying a Modified File
 git checkout -- CONTRIBUTING.md
 
+-- The Three Trees
+git cat-file -p HEAD
+git ls-tree -r HEAD
+git ls-files -s
+
+-- get latest
+git fetch --all
+git reset --hard origin/master
+
+-- 
+git reset HEAD --hard # To remove all not committed changes!
+git clean -fd         # To remove all untracked (non-git) files and folders!
+
+-- 
+git pull --rebase
+
+
 -- example -- end up with a single commit — the second commit replaces the results of the first
 git commit -m 'Initial commit'
 git add forgotten_file
