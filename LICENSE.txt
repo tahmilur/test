@@ -119,7 +119,12 @@ echo "# test" >> README.md
 -- to mark them as merged with
 git add <filename>
 -- before merging changes, you can also preview them by using
+-- to see change files
+git diff --name-status <remote-branch> <local-branch>
+-- chnage details
 git diff <source_branch> <target_branch>
+git diff <remote-branch> <local-branch>
+git diff origin/master
 -- to see what you’ve changed but not yet staged
 git diff
 -- If you want to see what you’ve staged that will go into your next commit  (--staged and --cached are synonyms)
