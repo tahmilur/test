@@ -1,11 +1,17 @@
 -- https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 -- https://git-scm.com/downloads
+-- https://stackoverflow.com/questions/12254076/how-do-i-show-my-global-git-configuration
+-- https://stackoverflow.com/questions/36810467/git-commit-signing-failed-secret-key-not-available
 -- If you already have Git installed, you can get the latest development version via Git itself
 git clone https://github.com/git/git
 
 git --version
 git help config
 git add -h
+git config --list
+git config -l
+git config --list --show-scope
+-- or look at your ~/.gitconfig file. The local configuration will be in your repository's .git/config file.
 git config --list --show-origin
 git config user.name
 git config user.email
@@ -14,6 +20,9 @@ git config --global user.email johndoe@example.com
 git config --global core.editor emacs
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
 git config --global init.defaultBranch main
+
+-- to edit global Git configuration
+git config --edit --global
 
 
 -- Showing Your Remotes
@@ -343,6 +352,12 @@ winget install GnuPG.GnuPG
 -- find 
 where gpg.exe
 
+-- to set the default format of openpgp
+git config --global --unset gpg.format
+
+-- list all  public and private key
+gpg --list-secret-keys --keyid-format=long
+
 -- to see alreay installed
 gpg --list-keys ~/.gnupg/pubring.gpg
 -- if not exists, create one
@@ -361,12 +376,16 @@ gpg --armor --export 0EA369A1D98D3ABB
 -- Add the GPG armor ASCII key to the GitHub account
 -- Go to Profile > Settings > SSH and GPG keys > New GPG key
 
+-- https://docs.github.com/en/authentication/managing-commit-signature-verification/telling-git-about-your-signing-key
 -- configure Git to use it for signing
 C:\> git config --global user.signingkey [short-key]
 C:\> git config --global commit.gpgsign true
 C:\> git config --global gpg.program "C:/Program Files (x86)/gnupg/bin/gpg"
 --
 
+-- with GPG subkey ID-> add (!) at the end
+git config --global user.signingkey 4BB6D45482678BE3!
+-- with GPG primary key ID
 git config --global user.signingkey 0EA369A1D98D3ABB
 git config --global commit.gpgsign true
 git config --global gpg.program "C:/Users/developer/AppData/Local/Programs/Git/usr/bin/gpg.exe"
@@ -393,6 +412,7 @@ git log --show-signature -1
 git log --pretty="format:%h %G? %aN  %s"
 
 -- If the merge contains only valid signed commits
+git merge --verify-signatures non-verify
 git merge --verify-signatures signed-branch
 git merge --verify-signatures -S  signed-branch
 
