@@ -56,4 +56,3 @@ $
    $ Press ctrl - l  -- Clear the screen leaving the current line at the top of the screen.
    $ clear -x    -- to erase the all the lines that are not in the scrollback.
    $ clear -- to erase all the lines, including the scrollback.
-
