@@ -21,6 +21,17 @@ git config --global core.editor emacs
 git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
 git config --global init.defaultBranch main
 
+-- git alias
+git config --global alias.c commit
+-- then alias will be visible 
+c=commit
+-- now alias will be workable
+git c -m "example of alias"
+
+-- in .gitconfig file, it will be
+[alias]
+c = commit
+
 -- to edit global Git configuration
 git config --edit --global
 
