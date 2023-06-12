@@ -15,40 +15,144 @@
 
 <div class="container mt-3">
   <div class="mt-4 p-5 bg-primary text-white rounded">
-    <h1>Bash Cheat Sheet</h1>
-    <p>Lorem ipsum...</p>
-  </div>
-  <h2>Bash Cheat Sheet</h2>
+    <h1>What is Git</h1>
+    <p>Git is a version control system that is widely used in the programming world. It is used for tracking changes in the source code during software development. Git is a speedy and efficient distributed tool that handles projects from small to very large ones. Git provides cheap local branching, convenient staging areas, and multiple workflows.
+The Git protocol is unique to Git. It is a special daemon that runs on port (9418) providing a service similar to SSH but without any authentication.
+
 <div class="alert alert-success">
   <strong>Success!</strong> Indicates a successful or positive action.
-</div>
-  <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>            
+</div> 
+
+</p>
+  </div>  
+  <div class="alert alert-light">    
+  <hr>  
   <table class="table">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th style="width: 150px;">Todo</th>
+        <th style="width: 200px;">Command</th>
+        <th>Example</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+        <td>init</td>
+        <td>git init</td>
+        <td>
+	    <ol>
+                <li>git init</li>
+		<li>git init &lt;directory&gt;</li>
+		<li>git init --quiet</li>
+		<li>git init --bare</li>
+            </ol>
+        </td>
       </tr>
       <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
+        <td>clone</td>
+        <td>git clone</td>
+        <td>
+	    <ol>
+                <li>git clone https://github.com/tahmilur/test.git</li>
+		<li>git clone &lt;repo&gt; &lt;directory&gt;</li>
+		<li>git clone --branch &lt;tag&gt; &lt;repo&gt;</li>
+		<li>git clone git@github.com:tahmilur/test.git</li>
+            </ol>
+        </td>
       </tr>
       <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+        <td>config<br>.git/config</td>
+        <td>git config</td>
+        <td>
+	    <ol>
+                <li>git config --list</li>
+                <li>git config --edit --global</li>
+                <li>git config --global user.email "w3docs_email@example.com"</li>
+		<li>git config user.email</li>
+                <li>git config --local user.email</li>
+		<li>git config --global user.email</li>
+		<li>git config --system user.email</li>                
+                <li>git config --global alias.ci commit</li>
+                <li>git config --global alias.amend ci --amend</li>
+            </ol>
+         </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+		<div class="alert alert-success">
+  		<strong>Saving changes</strong> Indicates a successful or positive 		action.
+		</div>
+          </td>
+        </tr>
+        <tr> 
+        <td>add</td>
+        <td>git add</td>
+        <td>
+	    <ol>
+                <li>git add *</li>
+                <li>git add &lt;filename&gt;</li>
+                <li>git add -p</li>
+		<li>git add -u</li>
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>commit</td>
+        <td>git commit</td>
+        <td>
+	    <ol>
+                <li>git commit -a</li>
+                <li>git commit -m "commit message"</li>
+                <li>git commit -am "commit message"</li>
+		<li>git commit --amend</li>
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>stash</td>
+        <td>git stash</td>
+        <td>
+	    <ol>
+                <li>git stash</li>
+                <li>git stash list</li>
+                <li>git stash save "message"</li>
+                <li>git stash pop</li>
+                <li>git stash pop stash@{0}</li>
+                <li>git stash show</li>
+                <li>git stash show -p or --patch</li>
+                <li>git stash apply</li>
+		<li>git stash -u</li>
+                <li>git stash -a</li>
+                <li>git stash branch add-stylesheet stash@{1}</li>
+                <li>git stash drop stash@{1}</li>
+                <li>git stash clear</li>
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>diff</td>
+        <td>git diff</td>
+        <td>
+	    <ol>
+                <li>git diff</li>
+                <li>git diff --color-words</li>
+                <li>git diff HEAD ./path/to/file</li>
+                <li>git diff branch1..branch2</li>
+                <li>git diff branch1...branch2</li>   
+                <li>git diff master new_branch ./test.txt</li> 
+		<li>git diff</li>   
+		<li>git diff --staged</li>
+		<li>git diff --cached</li> 
+                <li>git diff origin/master</li>      
+                <li>git diff --name-status <remote-branch> <local-branch></li> 
+                <li>git diff &lt;source_branch&gt; &lt;target_branch&gt;</li>
+                <li>git diff &lt;remote-branch&gt; &lt;local_branch&gt;</li> 
+            </ol>
+         </td>
+         </tr>
     </tbody>
   </table>
+  </div> 
 </div>
 
 </body>
