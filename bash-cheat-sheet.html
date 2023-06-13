@@ -80,7 +80,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
         <tr>
           <td colspan="3">
 		<div class="alert alert-success">
-  		<strong>Saving changes</strong> Indicates a successful or positive 		action.
+  		<strong>Saving changes</strong> Indicates a successful or positive action.
 		</div>
           </td>
         </tr>
@@ -121,7 +121,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git stash show</li>
                 <li>git stash show -p or --patch</li>
                 <li>git stash apply</li>
-		<li>git stash -u</li>
+				<li>git stash -u</li>
                 <li>git stash -a</li>
                 <li>git stash branch add-stylesheet stash@{1}</li>
                 <li>git stash drop stash@{1}</li>
@@ -140,9 +140,9 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git diff branch1..branch2</li>
                 <li>git diff branch1...branch2</li>   
                 <li>git diff master new_branch ./test.txt</li> 
-		<li>git diff</li>   
-		<li>git diff --staged</li>
-		<li>git diff --cached</li> 
+				<li>git diff</li>   
+				<li>git diff --staged</li>
+				<li>git diff --cached</li> 
                 <li>git diff origin/master</li>      
                 <li>git diff --name-status <remote-branch> <local-branch></li> 
                 <li>git diff &lt;source_branch&gt; &lt;target_branch&gt;</li>
@@ -150,6 +150,120 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+        <tr> 
+        <td>status</td>
+        <td>git status</td>
+        <td>
+            <div class="alert alert-success">
+				<strong>git status</strong> The git status command displays the state of the working directory and the staging area allowing to see the staged changes and the files that aren’t being tracked by Git. The Status output does not display any information about the committed project history.
+			</div>
+			<ol>
+                <li>git status</li>
+                <li>git status -s or --short</li>
+                <li>git status -b or branch</li>
+                <li>git status --ignored</li>
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>log</td>
+        <td>git log</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git log</strong> The git log command shows committed snapshots. It is used for listing and filtering the project history, and searching for particular changes. The git log only works on the committed history in comparison with git status controlling the working directory and the staging area.
+			</div>
+			<ol>
+                <li>git log</li>				
+                <li>git log branch-name</li>
+				<li>git log --branches=*</li>
+                <li>git log --all</li>
+                <li>git log-n 10</li>
+                <li>git log --since=2.weeks</li>
+				<li>git log --pretty="%h - %s" --author='Junio C Hamano' --since="2008-10-01" \
+					--before="2008-11-01" --no-merges -- t/</li>
+                <li>git log --oneline</li>
+                <li>git log --author=bob</li>
+                <li>git log --author="Bob Smith" -p w3docs.txt</li>
+                <li>git log --pretty=oneline</li>
+				<li>git log --graph --oneline --decorate --all</li>
+				<li>git log --name-status</li>
+				<li>git log -p -2</li>
+				<li>
+				git log --oneline<br>
+				git checkout b235bf4<br>
+				git checkout master
+				</li>
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>tag</td>
+        <td>git tag</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git tag</strong> Tags are references showing particular points in a Git history. The main function of tagging is to capture a point in a Git history that marks version release. Tags don’t change. After a tag is created, it has no history of commits.
+			</div>
+			<ol>
+                <li>git tag</li>
+				<li>git tag -l *-rc*</li>
+                <li>git tag tag-name</li>
+                <li>git tag -a v1.3</li>
+                <li>git tag -a v1.3-lw</li>
+				<li>
+				git log --pretty=oneline<br>
+				git tag -a v1.2 29389857951b64cf874c3557a0f3547bd83b899s
+				</li>
+				<li>git tag -a -f v1.3 29389857951b64cf874c3557a0f3547bd83b899s</li>
+				<li>git push origin v1.3</li>
+				<li>git checkout v1.3</li>
+				<li>git tag -d v1.3</li>
+            </ol>
+         </td>
+         </tr>	
+        <tr> 
+        <td>blame</td>
+        <td>git blame</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git blame</strong> The git blame command is a flexible tool with several options of use. The most important function of the git blame command is the display of author metadata attached to a particular committed line in a file. It is used for exploring the file history and finding out the last author who changed the line.
+			</div>
+			<ol>
+                <li>git blame README.md</li>               
+            </ol>
+         </td>
+         </tr>	
+        <tr> 
+        <td>clean</td>
+        <td>git clean</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git clean</strong> The git clean is an undo command, which completes other commands like git reset and git checkout. However, unlike the other commands that operate on files already added to the Git tracking index, the git clean command runs on untracked files. Untracked files are those created within the working directory, but are not yet added to the tracking index. The example below shows the difference between tracked and untracked files:.
+			</div>
+			<ol>
+                <li>git clean</li> 
+                <li>git clean -n</li>
+				<li>git clean -f</li>
+				<li>git clean -di</li>
+                <li>git clean -x</li>				
+            </ol>
+         </td>
+         </tr>
+        <tr> 
+        <td>revert</td>
+        <td>git revert</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git revert</strong> The git revert command is an “undo” operation however it is not the appropriate one. The git revert command reverts the changes introduced by the commit and appends a new commit with resulting reversed content. This does not allow Git to lose history which is essential for revision history integrity and proper collaboration. Reverting is used for applying the inverse commit from the project history. You can use git revert for automatically going back and making fixes.
+			</div>
+			<ol>
+                <li>git clean</li> 
+                <li>git clean -n</li>
+				<li>git clean -f</li>
+				<li>git clean -di</li>
+                <li>git clean -x</li>				
+            </ol>
+         </td>
+         </tr>			 
     </tbody>
   </table>
   </div> 
