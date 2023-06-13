@@ -48,6 +48,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
         </td>
       </tr>
+	  
       <tr>
         <td>clone</td>
         <td>git clone</td>
@@ -60,6 +61,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
         </td>
       </tr>
+	  
       <tr>
         <td>config<br>.git/config</td>
         <td>git config</td>
@@ -77,6 +79,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
         </tr>
+		
         <tr>
           <td colspan="3">
 		<div class="alert alert-success">
@@ -84,6 +87,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 		</div>
           </td>
         </tr>
+		
         <tr> 
         <td>add</td>
         <td>git add</td>
@@ -96,6 +100,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>commit</td>
         <td>git commit</td>
@@ -108,6 +113,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>stash</td>
         <td>git stash</td>
@@ -129,6 +135,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>diff</td>
         <td>git diff</td>
@@ -150,6 +157,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>status</td>
         <td>git status</td>
@@ -165,6 +173,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>log</td>
         <td>git log</td>
@@ -196,6 +205,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>tag</td>
         <td>git tag</td>
@@ -220,6 +230,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>	
+		 
         <tr> 
         <td>blame</td>
         <td>git blame</td>
@@ -231,13 +242,15 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git blame README.md</li>               
             </ol>
          </td>
-         </tr>	
+         </tr>
+		 
         <tr> 
         <td>clean</td>
         <td>git clean</td>
         <td>
 			<div class="alert alert-success">
 				<strong>git clean</strong> The git clean is an undo command, which completes other commands like git reset and git checkout. However, unlike the other commands that operate on files already added to the Git tracking index, the git clean command runs on untracked files. Untracked files are those created within the working directory, but are not yet added to the tracking index. The example below shows the difference between tracked and untracked files:.
+				clean.requireForce defaults to true and neither -i, -n, nor -f given; -d for directory, -x for ignore files
 			</div>
 			<ol>
                 <li>git clean</li> 
@@ -248,6 +261,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>revert</td>
         <td>git revert</td>
@@ -265,6 +279,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
             </ol>
          </td>
          </tr>
+		 
         <tr> 
         <td>reset</td>
         <td>git reset</td>
@@ -303,7 +318,131 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 				</li>
             </ol>
          </td>
+         </tr>	
+
+        <tr> 
+        <td>rm</td>
+        <td>git rm</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git rm</strong> The git rm command removes specific files or a group of files from a Git repository. The main function of git rm is removing tracked files from the index. The git rm can also be used for removing files from both the staging index and the working directory. But a file can not be removed only from the working directory. It should be mentioned that the git rm command does not remove branches.
+			</div>
+			<ol>
+                <li>git rm folder/\*.txt</li> 
+                <li>git rm -f git-*.sh</li>
+				<li>git diff --name-only --diff-filter=D -z | xargs -0 git rm --cached</li>			
+            </ol>
+         </td>
+         </tr>
+		 
+        <tr> 
+        <td>amend</td>
+        <td>git commit --amend</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git commit --amend</strong> You can often forget to format your commit, stage files or make mistake in your commit log message. Here git commit --amend comes to help. Executing this command will help you to correct such minor mistakes. In general , this command is used for changing the last commits. Execute git commit --amend command to combine staged changes with the previous commit.
+			</div>
+			<ol>
+                <li>git commit --amend -m "an updated commit message" : change last git commit message</li>
+				<li>git commit --amend --no-edit  : change committed files</li>
+            </ol>
+         </td>
+         </tr>
+
+        <tr> 
+        <td>rebase</td>
+        <td>git rebase</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git rebase</strong> Rebasing means to move or combine a series of commits to a new base commit. In other words, it changes the basis of the current branch from one commit to another making it look like the branch has been created from another commit. This is done by executing the git rebase command. Take into account that even if the branch looks the same, it is built up of wholly new commits..
+			</div>
+			<ol>
+                <li>git rebase -- d</li>
+				<li>git rebase -- p</li>
+				<li>git rebase -- x</li>
+            </ol>
+         </td>
+         </tr>
+		
+        <tr> 
+        <td>relog</td>
+        <td>git relog</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git relog</strong> The git reflog command is used for Git to record updates made to the tip of branches. It allows to return to commits even to the ones that are not referenced by any branch or any tag. After rewriting history, the reflog includes information about the previous state of branches and makes it possible to go back to that state if needed.
+			</div>
+			<ol>
+                <li>git reflog</li>
+				<li>git reflog show HEAD</li>
+				<li>git reflog show --all</li>
+				<li>git reflog show test_branch</li>
+				<li>git reflog stash</li>
+            </ol>
+         </td>
+         </tr>
+		 
+        <tr> 
+        <td>syncing</td>
+        <td>git syncing</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git syncing</strong> Git gives the opportunities to share branches between repositories instead of sharing a single changeset. In this chapter, we will learn about the set of commands that have their responsibilities in the syncing process. Find detailed information about the commands on our next pages.
+			</div>
+			<ol>
+                <li>git remote : The git remote command is designed for creating, viewing and removing connections to other repositories. By default, it lists all the remote connections that have previously been stored to other repositories.</li>
+				<li>git fetch : The git fetch command is used to download commits, files and references from the remote repository into the local repository.</li>
+				<li>git push : The git push command is used to upload the content of the local repository to the remote repository</li>
+				<li>git pull : The git pull command fetches and downloads content from the remote repository and integrates changes into the local repository.</li>
+            </ol>
+         </td>
          </tr>		 
+		
+        <tr> 
+        <td>remote</td>
+        <td>git remote</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git remote</strong> The git remote command is designed for creating, viewing and removing connections to other repositories. Remote connections are considered to be bookmarks in other repositories, which are convenient names used for referencing URL that are not convenient enough.
+			</div>
+			<ol>
+			    <li>git remote</li>
+				<li>git remote -v</li>
+				<li>git remote show remote-name</li>
+                <li>git remote add &ltNAME&gt &ltURL&gt : add remote</li>
+				<li>git remote rm &ltNAME&gt : remove remote</li>
+				<li>git remote rename &ltNAME&gt : rename remote<URL></li>
+            </ol>
+         </td>
+         </tr>		
+		 
+        <tr> 
+        <td>fetch</td>
+        <td>git fetch</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git fetch</strong> The git fetch command is used to download commits, files and references from a remote repository into the local repository. It is used to see what other members of the team have been working on.
+			</div>
+			<ol>
+			    <li>
+				Scenario Example<br>
+				1. Alice create new file 
+				$ git add README.md<br>
+				$ git commit -m "Add README file<br>
+				$ git push origin main<br>
+				2. Boob
+				$ git add some_file.txt<br>
+				$ git commit -m "Add new feature"<br>
+				$ git push origin feature-branch<br>
+				Alice
+				3. git fetch origin<br>
+				   git branch -r<br>
+				   git merge origin/feature-branch
+				   git push origin main
+				</li>
+            </ol>
+         </td>
+         </tr>		 
+		
     </tbody>
   </table>
   </div> 
