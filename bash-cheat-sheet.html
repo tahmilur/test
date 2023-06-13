@@ -7,7 +7,7 @@
   <meta name="keywords" content="HTML, CSS, JavaScript, Bash">
   <meta name="author" content="Tahmilur Rahman">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="30">
+  <meta http-equiv="refresh" content="10">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -254,16 +254,37 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
         <td>
 			<div class="alert alert-success">
 				<strong>git revert</strong> The git revert command is an “undo” operation however it is not the appropriate one. The git revert command reverts the changes introduced by the commit and appends a new commit with resulting reversed content. This does not allow Git to lose history which is essential for revision history integrity and proper collaboration. Reverting is used for applying the inverse commit from the project history. You can use git revert for automatically going back and making fixes.
+				<br><strong>Resetting vs. reverting</strong>: The git revert undoes only one commit while git reset reverts back to the previous project state by deleting succeeding commits. 
 			</div>
 			<ol>
-                <li>git clean</li> 
-                <li>git clean -n</li>
-				<li>git clean -f</li>
-				<li>git clean -di</li>
-                <li>git clean -x</li>				
+                <li>git revert HEAD</li> 
+                <li>
+				git log --online<br>
+				git revert &ltcommit-references&gt
+				</li>
             </ol>
          </td>
-         </tr>			 
+         </tr>
+        <tr> 
+        <td>reset</td>
+        <td>git reset</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git reset</strong> The git reset command is a tool used to undo changes. It has three forms of invocation matching Git’s three internal state management systems called three trees of Git. These systems include HEAD (the commit history), the staging index and the working directory.. 
+			</div>
+			<ol>
+                <li>git reset --hard</li>
+				<li>git reset --mixed</li>
+				<li>git reset --soft</li>
+                <li>
+				git log --online<br>
+				git status<br>
+				git ls-files -s<br>
+				git status && git ls-files -s
+				</li>
+            </ol>
+         </td>
+         </tr>		 
     </tbody>
   </table>
   </div> 
