@@ -273,9 +273,28 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 				<strong>git reset</strong> The git reset command is a tool used to undo changes. It has three forms of invocation matching Git’s three internal state management systems called three trees of Git. These systems include HEAD (the commit history), the staging index and the working directory.. 
 			</div>
 			<ol>
+			    <li>git reset</li>
+				<li>git reset &ltfile&gt</li>
+				<li>git reset &ltcommit&gt</li>
                 <li>git reset --hard</li>
+				<li>git reset --hard &ltcommit&gt</li>
 				<li>git reset --mixed</li>
 				<li>git reset --soft</li>
+				<li>
+				<strong>Removing local commits</strong><br>
+				git add yourname.txt<br>
+				git commit -m "Start to develop a project"<br>
+				git commit -a -m "Continue developing"<br>
+				git reset --hard HEAD~2
+				</li>
+				<li>
+				<strong>Unstaging files</strong><br>
+				git add .<br>
+				git reset common.txt<br>
+				git commit -m "Edit task.txt"<br>
+				git add index.txt<br>
+				git commit -m "Edit index.txt"
+				</li>				
                 <li>
 				git log --online<br>
 				git status<br>
