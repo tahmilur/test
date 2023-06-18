@@ -277,11 +277,11 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
         <td>add</td>
         <td>git add</td>
         <td>
-	    <ol>
+			<ol>
                 <li>git add *</li>
                 <li>git add &lt;filename&gt;</li>
                 <li>git add -p</li>
-		<li>git add -u</li>
+				<li>git add -u</li>
             </ol>
          </td>
          </tr>
@@ -294,7 +294,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git commit -a</li>
                 <li>git commit -m "commit message"</li>
                 <li>git commit -am "commit message"</li>
-		<li>git commit --amend</li>
+				<li>git commit --amend</li>
             </ol>
          </td>
          </tr>
@@ -335,7 +335,8 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git diff branch1..branch2</li>
                 <li>git diff branch1...branch2</li>   
                 <li>git diff master new_branch ./test.txt</li> 
-				<li>git diff</li>   
+				<li>git diff</li>
+				<li>git diff --name-only</li>
 				<li>git diff --staged</li>
 				<li>git diff --cached</li> 
                 <li>git diff origin/master</li>      
@@ -466,8 +467,9 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 			<ol>
                 <li>git revert HEAD</li> 
                 <li>
-				git log --online<br>
-				git revert &ltcommit-references&gt
+				git log --oneline<br>
+				git revert &ltcommit-hash&gt<br>
+				git revert &ltoldest-commit-hash&gt..&ltlatest-commit-hash&gt
 				</li>
             </ol>
          </td>
@@ -537,7 +539,13 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 			</div>
 			<ol>
                 <li>git commit --amend -m "an updated commit message" : change last git commit message</li>
+				<li>git rebase -i HEAD~5  : change multiple (here last 5) git commit message. type 'Reword' at the begining of each commit and save file. After that new commit message window , save and change it.</li>
 				<li>git commit --amend --no-edit  : change committed files</li>
+				<li>git push --force origin HEAD  : force push local changes to remote</li>
+				<li>git push --force-with-lease origin HEAD : safe force push local changes to remote</li>	
+				<li>git reset --soft HEAD~3  : undo last 3 commits </li>
+				<li>git reset --soft &ltsha1-commit-hash&gt : undo hash commits</li>
+				<li>git revert HEAD~2 : undo last 3 commits </li> 
             </ol>
          </td>
          </tr>
