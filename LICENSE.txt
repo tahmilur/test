@@ -376,6 +376,7 @@ gpg --list-secret-keys --keyid-format=long
 
 -- to see alreay installed
 gpg --list-keys ~/.gnupg/pubring.gpg
+
 -- if not exists, create one
 gpg --gen-key
 
@@ -410,7 +411,6 @@ git config --global gpg.program "C:/Users/developer/AppData/Local/Programs/Git/u
 gpg-agent --version
 -- Set the environment variable:
 GNUPGHOME=%USERPROFILE%\AppData\Roaming\gnupg
-
 
 -- Signing Tags:  All you have to do is use -s instead of -a
 git tag -s v1.5 -m 'my signed 1.5 tag'
