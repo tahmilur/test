@@ -325,7 +325,10 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
         <td>diff</td>
         <td>git diff</td>
         <td>
-	    <ol>
+            <div class="alert alert-success">
+				<strong>git diff</strong> The git diff is a multi-function Git command, which is used to compare changes committed in Git. Particularly, with the help of this command, you can take two input data sets and output the modifications between them.
+			</div>		
+			<ol>
                 <li>git diff</li>
                 <li>git diff --color-words</li>
                 <li>git diff HEAD ./path/to/file</li>
@@ -336,9 +339,14 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 				<li>git diff --staged</li>
 				<li>git diff --cached</li> 
                 <li>git diff origin/master</li>      
-                <li>git diff --name-status <remote-branch> <local-branch></li> 
+                <li>git diff --name-status &lt;remote-branch&gt; &lt;local-branch&gt;</li> 
                 <li>git diff &lt;source_branch&gt; &lt;target_branch&gt;</li>
                 <li>git diff &lt;remote-branch&gt; &lt;local_branch&gt;</li> 
+				<li>
+				    <strong>Compare with remote</strong><br>
+					git fetch<br>
+					git diff origin/main
+				</li>
             </ol>
          </td>
          </tr>
