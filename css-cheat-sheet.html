@@ -43,8 +43,18 @@ b:only-child
 h3:only-of-type
 :root
 
-@media only screen and (max-width: 600px) {
+body {
+  background-color: lightblue;
+}
+
+@media screen and (min-width: 400px) {
   body {
-    background-color: lightblue;
+    background-color: lightgreen;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  body {
+    background-color: lavender;
   }
 }
