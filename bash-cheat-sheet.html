@@ -20,8 +20,193 @@
 The Git protocol is unique to Git. It is a special daemon that runs on port (9418) providing a service similar to SSH but without any authentication.
 
 <div class="alert alert-success">
-  <strong>Success!</strong> Indicates a successful or positive action.
+  <strong>About SSH</strong> : Using the SSH protocol, you can connect and authenticate to remote servers and services. With SSH keys, you can connect to GitHub without supplying your username and personal access token at each visit. You can also use an SSH key to sign commits.
+  <br>You can access and write data in repositories on GitHub.com using SSH (Secure Shell Protocol). When you connect via SSH, you authenticate using a private key file on your local machine.
+  <br>When you set up SSH, you will need to generate a new private SSH key and add it to the SSH agent. You must also add the public SSH key to your account on GitHub before you use the key to authenticate or sign commits.
+  <hr>
+  <ul>
+	<li>
+		<strong>Checking for existing SSH keys</strong><br>
+		<ol>
+			<li>Open Git Bash.</li>
+			<li>ps aux | grep ssh  : To check no of ssh-agent process running</li>
+			<li>kill &ltPID&gt : kill if more than one</li>
+			<li>$ ls -al ~/.ssh : list of available SSH keys</li>
+		</ol>
+	</li>
+	<li>
+		<strong>Generating a new SSH key</strong><br>
+		<ol>
+			<li>Open Git Bash.</li>
+			<li>$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"</li>
+			<li>
+				Then you have to choose the file location.<br>
+				> Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+			</li>
+			<li>
+				Then you should add a secure passphrase, which will be required any time the SSH key is used<br>
+				> Enter passphrase (empty for no passphrase): [Type a passphrase]<br>
+				> Enter same passphrase again: [Type passphrase again]				
+			</li>
+			<li>
+				Run ssh agent<br>
+				$ eval "$(ssh-agent -s)"
+			</li>
+			<li>
+				Adding your SSH key to the ssh-agent<br>
+				$ ssh-add ~/.ssh/id_rsa
+			</li>
+			<li>
+				Copy SSH file to clipboard<br>
+				$ clip < ~/.ssh/id_rsa.pub			
+			</li>
+			<li>
+				Adding new SSH key to GitHub <br>
+				GitHub->setting->keys->ssh-key->new SSH Key
+			</li>
+			<li>
+				Testing your SSH connection<br>
+				$ ssh -T git@github.com
+			</li>
+			<li>
+				clone using SSH key<br>
+				$ git clone ssh://git@ssh.github.com:443/tahmilur/test.git<br>
+				$ git clone ssh://git@ssh.github.com:443/tahmilur/test.git /d/xyz  -- different directory
+			</li>
+		</ol>
+	</li>
+	<li>
+		<strong>Adding or changing a passphrase</strong><br>
+		$ ssh-keygen -p -f ~/.ssh/id_rsa<br>
+		> Enter old passphrase: [Type old passphrase]<br>
+		> Key has comment 'your_email@example.com'<br>
+		> Enter new passphrase (empty for no passphrase): [Type new passphrase]<br>
+		> Enter same passphrase again: [Repeat the new passphrase]<br>
+		> Your identification has been saved with the new passphrase.		
+	</li>
+	<li>
+		<strong>Auto-launching ssh-agent on Git for Windows</strong><br>
+		<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/working-with-ssh-key-passphrases">Auto-launching ssh-agent</a>
+	</li>
+  </ul>  
 </div> 
+
+<div class="alert alert-success">
+  <strong>About commit signature</strong> : Using GPG, SSH, or S/MIME, you can sign tags and commits locally. These tags or commits are marked as verified on GitHub so other people can be confident that the changes come from a trusted source.
+  <br>You can sign commits and tags locally, to give other people confidence about the origin of a change you have made. If a commit or tag has a GPG, SSH, or S/MIME signature that is cryptographically verifiable, GitHub marks the commit or tag "Verified" or "Partially verified."
+  <br>Commits and tags have the following verification statuses, depending on whether you have enabled vigilant mode.
+  <br>You can use GPG to sign commits with a GPG key that you generate yourself.
+  <hr>
+  <ul>
+	<li>
+		<strong>To sign commits using GPG and have those commits verified on GitHub, follow these steps:</strong><br>
+		<ol>
+			<li>Open Git Bash.</li>
+			<li>
+				Install GPG if not<br>
+				$ winget install GnuPG.GnuPG
+			</li>
+			<li>
+				Find gpg<br>
+				$ where gpg.exe
+			</li>
+			<li>
+				verify gpg and gpg-agent version<br>
+				$ gpg --version<br>
+				$ gpg-agent --version<br>
+			</li>
+			<li>
+				Set the environment variable:<br>
+				GNUPGHOME=%USERPROFILE%\AppData\Roaming\gnupg
+			</li>
+			<li>
+				To set the default format of openpgp<br>
+				$ git config --global --unset gpg.format
+			</li>
+			<li>
+				List all  existing public and private key<br>
+				$ gpg --list-secret-keys --keyid-format=long			
+			</li>
+			<li>
+				To see alreay installed<br>
+				$ gpg --list-keys ~/.gnupg/pubring.gpg
+			</li>
+			<li>
+				unset this configuration so the default format of openpgp will be used<br>
+			    $ git config --global --unset gpg.format
+			</li>
+			<li>
+				If not exists, create one<br>
+				$ gpg --gen-key<br>
+				$ gpg --full-generate-key
+			</li>
+			<li>
+				Then export it<br>
+				$ gpg --list-secret-keys --keyid-format=long<br>
+				
+				<p style="margin:1px blue solid;padding:5px;background-color: #fcfccc;display:block;">
+				Example output: <br>
+				/c/Users/developer/.gnupg/pubring.kbx<br>
+				-------------------------------------<br>
+				sec   rsa3072/0EA369A1D98D3ABB 2023-06-10 [SC] [expires: 2025-06-09]<br>
+					  19FDA8268682B29D699F34770EA369A1D98D3ABB<br>
+				uid                 [ultimate] Md Tahmilur Rahman <tahmilur@yahoo.com><br>
+				ssb   rsa3072/050B1312038FAC64 2023-06-10 [E] [expires: 2025-06-09]<br>
+				</p>
+				
+				Then export the public key using GPG key ID (sec   rsa3072/0EA369A1D98D3ABB) including the BEGIN/END text: <br>
+				$ gpg --armor --export 0EA369A1D98D3ABB<br>
+			</li>
+			<li>
+				configure with signing key<br>	
+				$ git config --global gpg.format ssh  -- Configure Git to use SSH to sign commits and tags<br>
+				$ git config --global user.signingkey /PATH/TO/.SSH/KEY.PUB  -- To set your SSH signing key in Git<br>
+				<hr>
+				$ git config --global user.signingkey 0EA369A1D98D3ABB   -- with GPG primary key ID<br>				
+				$ git config --global user.signingkey 050B1312038FAC64!  -- with GPG subkey ID-> add (!) at the end<br>
+				$ git config --global commit.gpgsign true<br>
+				$ git config --global gpg.program "C:/Users/developer/AppData/Local/Programs/Git/usr/bin/gpg.exe"
+			</li>
+			<li>
+				Add the GPG armor ASCII key to the GitHub account<br>
+				Go to Profile > Settings > SSH and GPG keys > New GPG key
+			</li>
+			<li>
+				<a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits" target="_blank">Signing commits</a><br>
+				$ git commit -S -m "YOUR_COMMIT_MESSAGE"  -- Creates a signed commit
+				$ git push -- Pushes your local commits to the remote repository
+			</li>
+			<li>
+				<a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-tags" target="_blank">Signing tags</a><br>
+				$ git tag -s MYTAG  -- Creates a signed tag
+				$ git tag -v MYTAG  -- Verify your signed tag
+				$ git push origin MYTAG  -- Pushes your local tags to the remote repository
+			</li>
+			<li>
+				<a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/associating-an-email-with-your-gpg-key" target="_blank">Associating an email with your GPG key</a><br>
+				Your GPG key must be associated with a GitHub verified email that matches your committer identity.<br>
+				<hr>
+				<ol>
+					<li>Open Git Bash.</li>
+					<li>$ gpg --list-secret-keys --keyid-format=long</li>
+					<li>$ gpg --edit-key GPG key ID</li>
+					<li>$ gpg> adduid</li>
+					<li>Follow the prompts to supply your real name, email address, and any comments</li>
+					<li>Enter O to confirm your selections.</li>
+					<li>Enter your key's passphrase.</li>
+					<li>$ gpg> save</li>
+					<li>$ gpg --armor --export 3AA5C34371567BD2  -- using GPG key ID</li>
+					<li>
+						Upload the GPG key by adding it to your GitHub account<br>
+						Go to Profile > Settings > SSH and GPG keys > New GPG key
+					</li>
+				</ol>
+			</li>
+			
+		</ol>
+	</li>
+  </ul>  
+</div>
 
 </p>
   </div>  
@@ -37,14 +222,31 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
     </thead>
     <tbody>
       <tr>
+        <td>config<br>.git/config</td>
+        <td>git config</td>
+        <td>
+			<ol>
+                <li>git config --list</li>
+                <li>git config --edit --global</li>
+                <li>git config --global user.email "w3docs_email@example.com"</li>
+				<li>git config user.email</li>
+				<li>git config --local user.email</li>
+				<li>git config --global user.email</li>
+				<li>git config --system user.email</li>                
+                <li>git config --global alias.ci commit</li>
+                <li>git config --global alias.amend ci --amend</li>
+            </ol>
+         </td>
+        </tr>	
+      <tr>
         <td>init</td>
         <td>git init</td>
         <td>
-	    <ol>
-                <li>git init</li>
-		<li>git init &lt;directory&gt;</li>
-		<li>git init --quiet</li>
-		<li>git init --bare</li>
+			<ol>
+				<li>git init</li>
+				<li>git init &lt;directory&gt;</li>
+				<li>git init --quiet</li>
+				<li>git init --bare</li>
             </ol>
         </td>
       </tr>
@@ -60,25 +262,8 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 		<li>git clone git@github.com:tahmilur/test.git</li>
             </ol>
         </td>
-      </tr>
-	  
-      <tr>
-        <td>config<br>.git/config</td>
-        <td>git config</td>
-        <td>
-	    <ol>
-                <li>git config --list</li>
-                <li>git config --edit --global</li>
-                <li>git config --global user.email "w3docs_email@example.com"</li>
-		<li>git config user.email</li>
-                <li>git config --local user.email</li>
-		<li>git config --global user.email</li>
-		<li>git config --system user.email</li>                
-                <li>git config --global alias.ci commit</li>
-                <li>git config --global alias.amend ci --amend</li>
-            </ol>
-         </td>
-        </tr>
+      </tr> 
+
 		
         <tr>
           <td colspan="3">
@@ -423,25 +608,210 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 				<strong>git fetch</strong> The git fetch command is used to download commits, files and references from a remote repository into the local repository. It is used to see what other members of the team have been working on.
 			</div>
 			<ol>
+			    <li>git fetch</li>
+			    <li>git fetch --all : downloads commits, files and references from all remotes into the local repository without merging and rebasing anything</li>
+				<li>
+				Steps to forcing git pull to override local files<br>
+				1. git fetch --all<br>
+				2. git reset --hard origin/branch-name   : --hard option will delete any unpushed local commits and all local changes will be lost
+				</li>
 			    <li>
 				Scenario Example<br>
+				<hr>
 				1. Alice create new file 
 				$ git add README.md<br>
 				$ git commit -m "Add README file<br>
 				$ git push origin main<br>
-				2. Boob
+				2. Boob<br>
 				$ git add some_file.txt<br>
 				$ git commit -m "Add new feature"<br>
 				$ git push origin feature-branch<br>
-				Alice
-				3. git fetch origin<br>
+				3. Alice<br>
+				   git fetch origin<br>
 				   git branch -r<br>
-				   git merge origin/feature-branch
-				   git push origin main
+				   git merge origin/feature-branch<br>
+				   git push origin main<br>
 				</li>
             </ol>
          </td>
-         </tr>		 
+         </tr>
+
+        <tr> 
+        <td>push</td>
+        <td>git push</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git push</strong> The git push command uploads the content of the local repository to the remote repository. Pushing is the opposite of fetching. If git fetch imports the content to the local branches, git push exports it to the remote branches.
+			</div>
+			<ol>
+			    <li>
+					# make changes to a repo and git add<br>
+					git add more/changed/w3docs.txt<br>
+					git commit --amend -m "message"<br>						
+					git commit --amend<br>
+				
+					# update the existing commit message<br>
+					git push --force origin master<br>
+					
+					# push branch first time<br>
+					git push -u origin your-branch-name   : -u flag is short for --set-upstream. <br>
+
+					# delete a remote branch<br>
+					git branch -D branch_name<br>
+					git push origin :branch_name<br>					
+				</li>
+			    <li>git push</li>
+				<li>git push -f origin main</li>
+				<li>git remote show remote-name</li>
+                <li>git push --tags origin : push all local tags to remote</li>
+				<li>git push --all origin : push all branch</li>
+				<li>git push --dry-run origin master : This will simulate a push to the master branch of the origin remote repository, without actually pushing anything</li>
+				<li>git push --force-with-lease origin master</li>
+            </ol>
+         </td>
+         </tr>	
+
+        <tr> 
+        <td>pull</td>
+        <td>git pull</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git pull</strong> The git pull command fetches and downloads content from the remote repository and integrates changes into the local repository. The git pull command is called as the combination of git fetch followed by git merge.
+			</div>
+			<ol>
+			    <li>git pull</li>
+				<li>git pull &ltremote&gt &ltbranch&gt</li>
+				<li>git pull --rebase : rebase your changes on top of remote</li>
+                <li>git pull --no-commit : This command will fetch the changes from the remote repository, but won't automatically merge them into your local branch. Instead, it will leave the changes as staged changes, which you can review and commit manually.</li>
+            </ol>
+         </td>
+         </tr>	
+
+        <tr> 
+        <td>branch</td>
+        <td>git branch</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git branch</strong> The git branch command creates, lists and deletes branches. It doesn’t allow switching between branches or putting a forked history back together again. Thus, git branch is integrated with the git checkout and git merge commands.
+			</div>
+			<ol>
+			    <li>git branch : list all branchs</li>
+			    <li>git branch test_branch  : create a new branch</li>
+				<li># create remote branch <br>
+				git remote add new-remote-repo https://hostname/user/repo.git   : Add remote repo to local repo config <br>
+				git push new-remote-repo test_branch~
+				</li>
+				<li>git branch -d test_branch : delete local branch</li>
+				<li>git branch -D test_branch : force delete local branch</li>
+                <li>git push origin --delete test_branch : delete remote branch.</li>
+				<li>git push origin :test_branch -- delete remote branch.</li>
+            </ol>
+         </td>
+         </tr>	
+
+        <tr> 
+        <td>checkout</td>
+        <td>git checkout</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git checkout</strong> The git checkout command switches branches or restores working tree files. It operates on files, commits, and branches. The git checkout command allows switching between multiple features in just a single repository.
+			</div>
+			<ol>
+				<li>git checkout feature_branch :  switch to branch</li>
+				<li>git checkout -b feature_branch :  create and switch to it</li>
+                <li>git checkout -b new_branch existing_branch : existing_branch will base new_branch off instead of the current HEAD.</li>
+				<li>
+				<strong>Checking out remote branches</strong><br>
+				1. git fetch --all<br>
+				2. git checkout &ltremote_branch&gt : new version<br>
+				3. git checkout &ltremote_branch&gt origin/&ltremote_branch&gt : older versions of Git<br>
+				4. git checkout -b &ltbranchname&gt<br>
+				5. git reset --hard origin/&ltbranchname&gt
+				</li>
+            </ol>
+         </td>
+         </tr>	
+
+        <tr> 
+        <td>merge</td>
+        <td>git merge</td>
+        <td>
+			<div class="alert alert-success">
+				<strong>git merge</strong> The git merge command integrates the independent lines of development into a single branch. The git merge command goes hand in hand with the git checkout command to select the current branch and the git branch command with the -d flag to delete the obsolete target branch.
+				<br><br>The primary use of git merge is to combine two branches. It is also used to merge multiple commits into one history. In the following illustration, git merge takes two branch tips and finds a common case commit between them. The common base commit creates a new commit that merges the changes of the sequence of each merge commit. Here we have two branches: a master and a stage. We should merge the stage branch to the master branch.
+			</div>
+			<ol>
+				<li>
+				 <strong>Merging process: steps to do</strong><br>
+				 <ul>
+				   <li>Firstly, invoke git status so that to point HEAD to the correct merge-receiving branch. Run git checkout <receiving branch> to switch to the receiving branch.</li>
+				   <li>The next step is to fetch latest remote commits. The receiving branch and the merging branch should be updated with the latest remote changes. Invoke git fetch to pull the latest remote commits. After the fetching process invoke git pull to update the master branch.</li>
+				   <li>The final step is executing git merge <branch name> which is the name of the branch to be merged into the receiving branch.</li>
+				 </ul>
+				</li>
+				<li>
+					<strong>Fast forward merge : A fast-forward merges are used to fix bugs and small features</strong><br>
+					<ul>
+						<li> git checkout -b stage master  # Start the stage </li>
+						<li> git add &ltfile&gt # Edit some files </li>
+						<li> git commit -m "Start with the stage" </li>
+						<li>git add &ltfile&gt # Edit more files </li>
+						<li> git commit -m "Finish with the stage" </li>
+						<li> git checkout master # Merge in the stage branch </li>
+						<li>git merge stage  -- merge with master </li>
+						<li> git merge --no-ff &ltbranch&gt  -- marge with comments </li>
+						<li> git branch -d stage  -- delete the branch </li>
+					</ul>
+				</li>
+				<li>
+					<strong>3-way merge : 3-way merges are used to integrate long-running features</strong><br>
+					<ul>
+						<li> git checkout -b stage master  # Start the stage </li>
+						<li> git add &ltfile&gt # Edit some files </li>
+						<li> git commit -m "Start with the stage" </li>
+						<li>git add &ltfile&gt # Edit more files </li>
+						<li> git commit -m "Finish with the stage" </li>
+						<li> git checkout master # Merge in the stage branch </li>
+						<li> git add &ltfile&gt # Edit some files </li>
+						<li> git commit -m "Make some super-stable changes to master" </li>						
+						<li>git merge stage  -- merge with master </li>
+						<li> git merge --no-ff &ltbranch&gt  -- marge with comments </li>
+						<li> git branch -d stage  -- delete the branch </li>
+					</ul>
+				</li>				
+            </ol>
+			
+			<div class="alert alert-success">
+				<strong>Merge conflicts</strong> occur when multiple authors edit the same content or when one developer deletes a file while another developer was making changes on it. To solve this problem developers work in isolated branches. The git merge command is responsible for combining isolated branches and resolving conflicting edits.
+				<br><strong>Types of merge conflicts</strong>
+				<ul>
+					<li>Merge failure on start : error: Entry '&ltfileName&gt' not uptodate. Cannot merge. (Changes in working directory)</li>
+					<li>Failure during merge : error: Entry '&ltfileName&gt' would be overwritten by merge. Cannot merge. (Changes in staging area)</li>
+				</ul>
+				<div>
+					<strong>Creating a merge conflict</strong><br>
+					<ul>
+						<li>mkdir test-dir</li>
+						<li>cd test-dir</li>
+						<li>git init .</li>
+						<li>echo "some content" > example.txt</li>
+						<li>git add example.txt</li>
+						<li>git commit -am "initial commit"</li>
+						<li><strong>git checkout -b branch_to_merge</strong></li>
+						<li>echo "completely different content to merge later" > example.txt</li>	
+						<li>git commit -am "edit the content of example.txt to make a conflict"</li>
+						<li><strong>git checkout master</strong></li>
+						<li>echo "content to add" >> example.txt</li>
+						<li>git commit -am "added content to example.txt"</li>
+						<li><strong>git merge branch_to_merge</strong></li>
+						<li><strong style="color:red;">conflict found. open editor and remove all marks and ADD it again</strong></li>
+						<li>git commit -m "the conflict in example.txt is merged and resolved"</li>
+					</ul>
+				</div>
+			</div>
+			
+         </td>
+         </tr>			 
 		
     </tbody>
   </table>
