@@ -344,6 +344,7 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
                 <li>git diff &lt;source_branch&gt; &lt;target_branch&gt;</li>
                 <li>git diff &lt;remote-branch&gt; &lt;local_branch&gt;</li>
 				<li>git diff 7e33531 a6beff0  -- using two commit id</li>
+				<li>git checkout 7e33531   -- switch to commit 7e33531 </li>
 				<li>
 				    <strong>Compare with remote</strong><br>
 					git fetch<br>
@@ -392,6 +393,16 @@ The Git protocol is unique to Git. It is a special daemon that runs on port (941
 				<li>git log --graph --oneline --decorate --all</li>
 				<li>git log --name-status</li>
 				<li>git log -p -2</li>
+				<li>
+				Steps to finding and restoring a deleted file
+					<ol>
+						<li>git log --all --full-history -- "*MyFile.*"</li>
+						<li>git show --pretty="" --name-only &ltsha1-commit-hash&gt</li>
+						<li>git log --all --full-history -- &ltpath-to-file&gt</li>
+						<li>git show <sha1-commit-hash> -- &ltpath-to-file&gt</li>
+						<li>git checkout &ltsha1-commit-hash&gt^ -- &ltpath-to-file&gt</li>
+					</ol>
+				</li>
 				<li>
 				git log --oneline<br>
 				git checkout b235bf4<br>
